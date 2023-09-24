@@ -19,6 +19,6 @@ public class RandomNumberGenerator {
     //Random Number Generator
     public void generateRandomNumber(){
         Random rand = new Random();
-        setRandomNumber(rand.nextInt(1000));        
+        setRandomNumber(rand.nextInt(1));
     }
 }
