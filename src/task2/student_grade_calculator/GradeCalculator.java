@@ -31,6 +31,7 @@ public class GradeCalculator {
         if (subjects.isEmpty() || gradeWithSubjects.isEmpty())
             System.out.println("All Data is not available");
         else {
+            System.out.println("\n\nGrades are following--------");
             for (String i : subjects) {
                 System.out.println(i + "\t:\t" + gradeWithSubjects.get(i)+" out of 100");
             }
@@ -40,9 +41,8 @@ public class GradeCalculator {
         int totalGrades=0;
         float average;
         for (String i : subjects) totalGrades += gradeWithSubjects.get(i);
-
         average = totalGrades/subjects.size();
-         System.out.println("\nResults are following--------+" +
+        System.out.println("\n\nResults are following--------+" +
                  "\nTotal Grades\t:\t"+totalGrades+"" +
                  "\nAverage\t\t:\t"+average+"" +
                  "\nPercentage\t:\t"+average+"%");
@@ -50,13 +50,9 @@ public class GradeCalculator {
     public GradeCalculator(){
         System.out.println("Enter Number of Subjects : ");
         int number = new Scanner(System.in).nextInt();
-
         subjects=addSubjects(number);
         gradeWithSubjects = addMarks();
         showGrades();
         showResult();
     }
-
-
-
 }
