@@ -1,5 +1,6 @@
 package task1.number_game;
 
+import java.util.Random;
 import java.util.Scanner;
 
 public class GuessNumberGame {
@@ -19,9 +20,10 @@ public class GuessNumberGame {
         int lives = 0;
         do{
             String r = fetchData();
-
+            int generatedNumber = new RandomNumberGenerator().getRandomNumber();
             if (r.equals("Correct")){
-                System.out.println("You have Guessed it Correctly. your Score..."+score);
+
+                System.out.println("You have Guessed it Correctly. your Score..."+score+"\nNumber : "+generatedNumber);
                 System.out.println("\n\nDo you want to play more or Leave this game With Score : "+score+"\nPress 1. To play\nPress Any Number To Quit");
                 int choice = 0;
                 choice = new Scanner(System.in).nextInt();
@@ -31,7 +33,7 @@ public class GuessNumberGame {
                     else lives = 4;
             }
             if (lives<3 && !r.equals("Correct") && lives<3){
-                System.out.println(r);
+                System.out.println("Your Assumption is "+r+"\nNumber was "+generatedNumber);
                 lives++;
             }
             if (lives==3){
