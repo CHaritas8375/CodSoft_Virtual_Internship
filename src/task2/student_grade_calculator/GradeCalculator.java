@@ -7,7 +7,7 @@ import java.util.Scanner;
 public class GradeCalculator {
     ArrayList<String> subjects;
     HashMap<String, Integer> gradeWithSubjects;
-    ArrayList<String> addSubjects(int totalSubject) {
+    void addSubjects(int totalSubject) {
         subjects = new ArrayList<>();
 
         for (int i = 0; i < totalSubject; i++) {
@@ -15,16 +15,14 @@ public class GradeCalculator {
             String subject = new Scanner(System.in).nextLine();
             subjects.add(subject);
         }
-        return subjects;
     }
-    HashMap<String, Integer> addMarks() {
+    void addMarks() {
         gradeWithSubjects = new HashMap<>();
         for (String subject : subjects) {
             System.out.println("Enter Grades of " + subject + " : ");
             int grades = new Scanner(System.in).nextInt();
             gradeWithSubjects.put(subject, grades);
         }
-        return gradeWithSubjects;
     }
     void showGrades() {
 
@@ -44,14 +42,14 @@ public class GradeCalculator {
         average = totalGrades/subjects.size();
         System.out.println("\n\nResults are following--------+" +
                  "\nTotal Grades\t:\t"+totalGrades+"" +
-                 "\nAverage\t\t:\t"+average+"" +
-                 "\nPercentage\t:\t"+average+"%");
+                 "\nAverage\t\t\t:\t"+average+"" +
+                 "\nPercentage\t\t:\t"+average+"%");
     }
     public GradeCalculator(){
         System.out.println("Enter Number of Subjects : ");
         int number = new Scanner(System.in).nextInt();
-        subjects=addSubjects(number);
-        gradeWithSubjects = addMarks();
+        addSubjects(number);
+        addMarks();
         showGrades();
         showResult();
     }
