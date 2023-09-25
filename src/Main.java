@@ -1,4 +1,6 @@
 import task1.number_game.GuessNumberGame;
+import task2.student_grade_calculator.GradeCalculator;
+
 import java.util.Scanner;
 
 public class Main {
@@ -6,7 +8,7 @@ public class Main {
        System.out.println("Enter your Choice..." +
                "\n1. for Task 1 - Number Game"+
                "\n2. for Task 2 - Student Grade Calculator");
-       
+
         int choice = new Scanner(System.in).nextInt();
 
         switch (choice){
@@ -15,7 +17,7 @@ public class Main {
                 gng.startGame();
                 break;
             case 2:
-
+                GradeCalculator gc = new GradeCalculator();
                 break;
             default:
                 System.out.println("You Entered wrong Choice....");
