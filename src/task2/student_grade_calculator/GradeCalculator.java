@@ -7,6 +7,7 @@ import java.util.Scanner;
 public class GradeCalculator {
     ArrayList<String> subjects;
     HashMap<String, Integer> gradeWithSubjects;
+
     void addSubjects(int totalSubject) {
         subjects = new ArrayList<>();
 
@@ -16,6 +17,7 @@ public class GradeCalculator {
             subjects.add(subject);
         }
     }
+
     void addMarks() {
         gradeWithSubjects = new HashMap<>();
         for (String subject : subjects) {
@@ -24,8 +26,8 @@ public class GradeCalculator {
             gradeWithSubjects.put(subject, grades);
         }
     }
-    void showGrades() {
 
+    void showGrades() {
         if (subjects.isEmpty() || gradeWithSubjects.isEmpty())
             System.out.println("All Data is not available");
         else {
@@ -35,11 +37,14 @@ public class GradeCalculator {
             }
         }
     }
+
     void showResult(){
         int totalGrades=0;
         float average;
+
         for (String i : subjects) totalGrades += gradeWithSubjects.get(i);
         average = totalGrades/subjects.size();
+
         System.out.println("\n\nResults are following--------+" +
                  "\nTotal Grades\t:\t"+totalGrades+"" +
                  "\nAverage\t\t\t:\t"+average+"" +
@@ -48,6 +53,7 @@ public class GradeCalculator {
     public GradeCalculator(){
         System.out.println("Enter Number of Subjects : ");
         int number = new Scanner(System.in).nextInt();
+
         addSubjects(number);
         addMarks();
         showGrades();
