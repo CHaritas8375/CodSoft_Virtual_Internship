@@ -52,9 +52,9 @@ public class GradeCalculator {
     }
     public GradeCalculator(){
         System.out.println("Enter Number of Subjects : ");
-        int number = new Scanner(System.in).nextInt();
+        int totalSubject = new Scanner(System.in).nextInt();
 
-        addSubjects(number);
+        addSubjects(totalSubject);
         addMarks();
         showGrades();
         showResult();
