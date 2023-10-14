@@ -57,8 +57,8 @@ public class BankATM{
     }
 
     public BankATM(){
-        init();
         if(initValue==0) createBankUsers();
+        init();
     }
 
     public void init(){
@@ -81,9 +81,9 @@ public class BankATM{
     public void banking(int ch) {
         System.out.println("\n\n\n**********************************************************************");
         System.out.println(">\tPlease Enter Your User ID  : ");
-        String userid = new Scanner(System.in).next();
+        String userid = new Scanner(System.in).nextLine();
         System.out.println(">\tPlease Enter Your Password : ");
-        String password = new Scanner(System.in).next();;
+        String password = new Scanner(System.in).nextLine();
 
         int counter = 0;
         while (userAuthenticity(userid, password)) {
