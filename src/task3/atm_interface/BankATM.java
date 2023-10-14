@@ -22,7 +22,7 @@ public class BankATM{
             System.out.println("You do not have enough amount in your account.");
         else {
             currentBalance = bankUsers.get(indexOf(userid)).getBalance();
-            currentBalance -= amount;
+            currentBalance = currentBalance + amount;
             bankUsers.get(indexOf(userid)).setBalance(currentBalance);
         }
     }
@@ -36,8 +36,6 @@ public class BankATM{
             initValue=1;
             return;
         }
-
-
         Scanner sc = new Scanner(System.in);
         System.out.println("\n\n**********************************************************************");
         System.out.println("Please Enter UserID : ");
@@ -46,13 +44,11 @@ public class BankATM{
         String pass = sc.next();
         System.out.println("Please Enter Current Deposit Amount : ");
         int bal = sc.nextInt();
-
         if(bankUsers.get(indexOf("admin")).getUser()!="admin") {
             System.out.println("This user is already Exist....\n Please try again...");
             return;
         }
         if(indexOf(userid)==-1) bankUsers.add(new BankUser(userid, bal, pass));
-
         sc.close();
     }
 
@@ -81,12 +77,11 @@ public class BankATM{
     public void banking(int ch) {
         System.out.println("\n\n\n**********************************************************************");
         System.out.println(">\tPlease Enter Your User ID  : ");
-        String userid = new Scanner(System.in).nextLine();
+        String userid = new Scanner(System.in).next();
         System.out.println(">\tPlease Enter Your Password : ");
-        String password = new Scanner(System.in).nextLine();
+        String password = new Scanner(System.in).next();
 
-        int counter = 0;
-        while (userAuthenticity(userid, password)) {
+        if (userAuthenticity(userid, password)) {
             if (ch == 2) {
                 System.out.println(">\tPlease Enter Amount to Deposit in the Account  : ");
                 int amount = new Scanner(System.in).nextInt();
@@ -97,7 +92,7 @@ public class BankATM{
             }
 
             if (ch == 3){
-                System.out.println(">\tPlease Enter Amount to Deposit in the Account  : ");
+                System.out.println(">\tPlease Enter Amount to Withdraw from the Account  : ");
                 int amount = new Scanner(System.in).nextInt();
                 withdrawAmount(amount,userid);
                 System.out.println("**********************************************************************");
@@ -105,8 +100,9 @@ public class BankATM{
                 System.out.println("**********************************************************************");
 
             }
-        }
-        System.out.println("Entered UserId and Password is wrong...\nPlease try Again...");
+        }else
+            System.out.println("Entered UserId and Password is wrong...\nPlease try Again...");
+
     }
     public int indexOf(String userID) {
         int pointer = 0;
