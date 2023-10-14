@@ -18,11 +18,11 @@ public class BankATM{
         bankUsers.get(indexOf(userid)).setBalance(currentBalance);
     }
     public void withdrawAmount(int amount,String userid){
+        currentBalance = bankUsers.get(indexOf(userid)).getBalance();
         if (currentBalance < amount)
             System.out.println("You do not have enough amount in your account.");
         else {
-            currentBalance = bankUsers.get(indexOf(userid)).getBalance();
-            currentBalance = currentBalance + amount;
+            currentBalance = currentBalance - amount;
             bankUsers.get(indexOf(userid)).setBalance(currentBalance);
         }
     }
@@ -30,26 +30,27 @@ public class BankATM{
         bankUsers = new ArrayList<>();
 
         if (initValue==0){
-            bankUsers.add(new BankUser("haritas",50000,"9876"));
+            bankUsers.add(new BankUser("haritas",1000,"9876"));
             bankUsers.add(new BankUser("admin",50000,"1234"));
-            bankUsers.add(new BankUser("shub123",50000,"7543"));
+            bankUsers.add(new BankUser("shub123",3000,"7543"));
             initValue=1;
             return;
         }
-        Scanner sc = new Scanner(System.in);
+        Scanner scan = new Scanner(System.in);
         System.out.println("\n\n**********************************************************************");
         System.out.println("Please Enter UserID : ");
-        String userid = sc.next();
-        System.out.println("Please Enter Password : ");
-        String pass = sc.next();
+        String userid = scan.next();
         System.out.println("Please Enter Current Deposit Amount : ");
-        int bal = sc.nextInt();
-        if(bankUsers.get(indexOf("admin")).getUser()!="admin") {
+        int bal = Integer.parseInt(scan.next().toString());
+        System.out.println("Please Enter Password : ");
+        String pass = scan.next();
+
+        if(indexOf(userid)>0) {
             System.out.println("This user is already Exist....\n Please try again...");
             return;
         }
         if(indexOf(userid)==-1) bankUsers.add(new BankUser(userid, bal, pass));
-        sc.close();
+        scan.close();
     }
 
     public BankATM(){
@@ -58,21 +59,36 @@ public class BankATM{
     }
 
     public void init(){
-        System.out.println("\n\n\n**********************************************************************");
-        System.out.println("###\tChoose Your Choice");
-        System.out.println("\t->Create User \t\t Press 1");
-        System.out.println("\t->Deposit \t\t Press 2");
-        System.out.println("\t->Withdraw \t\t Press 3");
-        int ch = new Scanner(System.in).nextInt();
-        switch (ch){
-            case 1 :
-                createBankUsers();
-                break;
-            case 2, 3:
-                banking(ch);
-                break;
-        }
+        boolean flag = true;
+        do {
+            System.out.println("\n\n\n**********************************************************************");
+            System.out.println("\t\tWELCOME TO ABC BANK ATM SERVICES");
+            System.out.println("**********************************************************************");
+            System.out.println("###\tChoose Your Option");
+            System.out.println("\t->Create User \t\t Press 1");
+            System.out.println("\t->Deposit \t\t\t Press 2");
+            System.out.println("\t->Withdraw \t\t\t Press 3");
+            System.out.println("\t->User Details \t\t Press 4");
+            System.out.println("\t->Exit..... \t\t Press any other Key..,");
+            int ch = Integer.parseInt(new Scanner(System.in).nextLine());
+            switch (ch) {
+                case 1:
+                    createBankUsers();
+                    break;
+                case 2, 3:
+                    banking(ch);
+                    break;
+                case 4:
+                    showUserData();
+                    break;
+                default:
+                    System.out.println("\n\n\n**********************************************************************");
+                    System.out.println("\t\tThanks for Using Our Banking Service...");
+                    System.out.println("**********************************************************************");
+                    flag=false;
+            }
 
+        }while (flag);
     }
     public void banking(int ch) {
         System.out.println("\n\n\n**********************************************************************");
@@ -87,7 +103,7 @@ public class BankATM{
                 int amount = new Scanner(System.in).nextInt();
                 depositAmount(amount,userid);
                 System.out.println("**********************************************************************");
-                System.out.println("Your Current Balance is : "+currentBalance);
+                System.out.println("\tYour("+bankUsers.get(indexOf(userid)).getUser()+"'s) Current Balance is : "+currentBalance);
                 System.out.println("**********************************************************************");
             }
 
@@ -96,19 +112,17 @@ public class BankATM{
                 int amount = new Scanner(System.in).nextInt();
                 withdrawAmount(amount,userid);
                 System.out.println("**********************************************************************");
-                System.out.println("Your Current Balance is : "+currentBalance);
+                System.out.println("\tYour ("+bankUsers.get(indexOf(userid)).getUser()+"'s)Current Balance is : "+currentBalance);
                 System.out.println("**********************************************************************");
-
             }
-        }else
-            System.out.println("Entered UserId and Password is wrong...\nPlease try Again...");
+        }else   System.out.println("Entered UserId and Password is wrong...\nPlease try Again...");
 
     }
     public int indexOf(String userID) {
         int pointer = 0;
         for (BankUser i: bankUsers) {
             if (!userID.equals(i.getUser())){
-                return pointer;
+                return pointer+1;
             }
             pointer++;
         }
@@ -122,4 +136,12 @@ public class BankATM{
         }
         return false;
     }
+
+    void showUserData(){
+        System.out.println("\n\n\n**********************************************************************");
+        for (BankUser i: bankUsers){
+            System.out.println("\t "+i.getUser()+"\t : \t"+i.getBalance());
+        }
+    }
+
 }
